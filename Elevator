@@ -1,0 +1,153 @@
+public class Elevator{
+    // information foundation of Elevator
+    int width = 5;
+    int length = 10;
+    int maxweight = 1000;
+    // information of Status Elevator
+    int numlayer = 1;
+    int total_weight = 0;
+    int maxlayer =15;
+    Status s = Status.stay;
+    // information User
+    int peopleInElevator=0;
+    int count=0;
+    int[][] infoAll = new int[1000][4]; // ชั้นที่จะไป น้ำหนัก สภานะการขึ้น
+    
+     
+     void addUser(int weight , int layer,int currentLayer){
+        
+        if(weight<0||weight>=maxweight||layer>15||layer<1||currentLayer>15||currentLayer<1){
+            System.out.print("The value received is invalid.");
+        }else{
+            infoAll[count][0] = layer;
+            infoAll[count][1] = weight;
+            infoAll[count][2] = 0;
+            infoAll[count][3] = currentLayer;
+            count++;
+        }
+        
+       }
+     
+    void addThings(int layer ,int weight , int width , int length,int currentLayer ){
+        //this.weight = weight;
+        //this.layer = layer;
+        //this.currentLayer = currentLayer;
+        if(weight<0||weight>=maxweight||layer>15||layer<1||currentLayer>15||currentLayer<1
+            ||width>this.width||length>this.length){
+            System.out.print("The value received is invalid.");
+        }else{
+            infoAll[count][0] = layer;
+            infoAll[count][1] = weight;
+            infoAll[count][2] = 0;
+            infoAll[count][3] = currentLayer;
+            count++;
+        }
+     }
+     
+     void updateInfo(){
+        //ข้อมูลการทำงานลิฟ สถานะ รับคน คนออก
+        // ขอมูลคนที่เหลือในชั้น
+        System.out.println("Current Layer = "+this.numlayer);
+        System.out.println("Total weight = "+this.total_weight);
+        System.out.println("Total people = "+this.peopleInElevator);
+        System.out.println("Status Elevator = "+this.s);
+        System.out.println("Total people in today = "+this.count);
+        System.out.println();
+    }
+    void ElevatorUp(){
+        
+        for(int i =0 ; i<count ; i++){
+            System.out.println("he");
+                if(infoAll[i][3]==numlayer
+                &&infoAll[i][0]>numlayer
+                &&infoAll[i][2]==0
+                &&(total_weight+infoAll[i][1])<maxweight
+                &&peopleInElevator<=9){
+                    System.out.println("User :"+(i+1)+"get up Elevator to floot "+infoAll[i][0]);
+                    infoAll[i][2]=1;
+                    peopleInElevator++;
+                    total_weight+=infoAll[i][1];
+                }
+            }
+            
+    }
+    void ElevatorDown(){
+        for(int i =0 ; i<count ; i++){
+                if(infoAll[i][3]==numlayer
+                &&infoAll[i][0]<numlayer
+                &&infoAll[i][2]==0
+                &&(total_weight+infoAll[i][1])<maxweight
+                &&peopleInElevator<=9){
+                    System.out.println("User :"+(i+1)+"get up Elevator to floot "+infoAll[i][0]);
+                    infoAll[i][2]=1;
+                    peopleInElevator++;
+                    total_weight+=infoAll[i][1];
+                }
+            }
+            
+    }
+    void nextLayer(){
+        
+        System.out.println("Elevator floot : "+numlayer);
+        System.out.print("turn out : ");
+        int temp = peopleInElevator;
+        for(int i =0 ; i<count ; i++){
+                if(infoAll[i][0]==numlayer&&infoAll[i][2]==1){
+                    System.out.println("User :"+(i+1)+"get out Elevator to floot "+infoAll[i][0]);
+                    infoAll[i][2]=-1;
+                    peopleInElevator--;
+                }
+            }
+            System.out.println(temp-peopleInElevator);
+          System.out.println("turn in");  
+        int dif=16;
+        int x=1;
+        if(s.equals(Status.stay)){
+           
+        for(int i=0;i<count;i++)
+        {
+            if(Math.abs(this.numlayer-infoAll[i][3])<dif&&infoAll[i][2]==0){
+                
+                dif = Math.abs(this.numlayer-infoAll[i][3]);
+                x = infoAll[i][3];
+                // บอกขึ้นรึลงไปเลย
+            }
+        }
+        if(x>numlayer){
+            s = Status.up;
+            this.ElevatorUp(); 
+            numlayer++;
+        }else if(x<numlayer){
+            s = Status.down;
+            this.ElevatorDown();
+            numlayer--;
+        }else{
+            
+        }
+        return;
+    }else if(s.equals(Status.up)){
+            ElevatorUp();
+            
+        if(peopleInElevator!=0){
+            numlayer++;
+        }else{
+            s = Status.down;
+            ElevatorDown();
+            
+            numlayer--;
+            System.out.println("Elevator stay floot : "+numlayer);
+            return;
+        }
+        }else{
+            ElevatorDown();
+            
+        if(peopleInElevator!=0){
+            numlayer--;
+        }else{
+            s = Status.stay;
+            System.out.println("Elevator stay floot : "+numlayer);
+            return;
+        }
+        }
+    }
+}
