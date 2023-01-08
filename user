@@ -1,0 +1,69 @@
+public class user
+{
+   Status s;  
+    int weight;
+    Type t;
+    int length;
+    int width;
+    int currenLayer;
+    int layer;
+    String[] personUser = new String[40];
+       
+        ElevatorPSN psn = new ElevatorPSN(); 
+        ElevatorPSG  psg =new ElevatorPSG();
+        ElevatorFG  fg = new ElevatorFG();
+        ElevatorPSC  psc = new ElevatorPSC();
+    public user(){
+        System.out.println("Welcome to the elevator sorting system.");
+        System.out.println();
+        System.out.println("Please select a type of person or thing.");
+        System.out.println("new_User = person  new_material = thing");
+        
+        System.out.println("Select  Type.person  Type.personnel  Type.cripple ");
+    }
+    public void User(int layer,int weight,Type type,int currentLayer)
+    {   
+        
+        if(type.equals(Type.person)){
+       psg.addUser(weight,layer,currentLayer);
+    }else if(type.equals(Type.cripple)){
+       psc.addUser(weight,layer,currentLayer);
+      
+    }else{
+        psn.addUser(weight,layer,currentLayer);
+        
+    }
+        
+    }
+    public void  carryThings(int layer,int weight,int length,int width,int currenLayer)
+    {
+       fg.addThings(layer,weight,length,width,currenLayer);
+    }
+    void switchFuntion(int Funtion){
+        System.out.println("");
+        switch(Funtion){
+            case 1:
+                System.out.println("Select Access current the Elevator information");
+            psg.updateInfo();
+            psn.updateInfo();
+            psc.updateInfo();
+            fg.updateInfo();
+            System.out.println();
+            break;
+              case 2:
+                System.out.println("Select command the Elevator to next step");
+                
+            psg.nextLayer();
+            psn.nextLayer();
+            psc.nextLayer();
+            fg.nextLayer();
+            System.out.println();
+            break;
+             default:
+            System.out.println("no this function");
+        
+        }
+    }
+    
+ 
+}
