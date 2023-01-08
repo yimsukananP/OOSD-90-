@@ -1,0 +1,14 @@
+public class ElevatorPSG extends Elevator
+{
+    @Override
+    public void updateInfo(){
+        System.out.println("ElevatorPSG");
+        super.updateInfo();
+    }
+    
+    @Override
+    void nextLayer(){
+        System.out.println("Status ElevatorPSG");
+        super.nextLayer();
+    }
+}
