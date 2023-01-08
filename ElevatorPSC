@@ -1,0 +1,20 @@
+public class ElevatorPSC extends Elevator
+{
+    ElevatorPSC(){
+     width = 10;
+     length = 10;
+     maxweight = 500;
+    }
+    
+    @Override
+    public void updateInfo(){
+        System.out.println("ElevatorPSC");
+        super.updateInfo();
+    }
+    
+    @Override
+    void nextLayer(){
+        System.out.println("Status ElevatorPSC");
+        super.nextLayer();
+    }
+}
