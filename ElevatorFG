@@ -1,0 +1,20 @@
+
+public class ElevatorFG extends Elevator
+{
+    ElevatorFG(){
+        width = 20;
+        length = 15;
+        maxweight = 1500;
+    }
+    
+   @Override
+        void updateInfo(){
+        System.out.println("ElevatorFG");
+        super.updateInfo();
+    }
+    @Override
+    void nextLayer(){
+        System.out.println("Status ElevatorFG");
+        super.nextLayer();
+    }
+}
